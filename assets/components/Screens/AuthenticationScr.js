@@ -23,9 +23,9 @@ const AuthenticationScr = () => {
         size  = {24}
         color = "black"
         style = {{ marginRight: 10 }}
-            // onPress={() => {
-            //   // Handle the icon press event
-            // }}
+              // onPress={() => {
+              //   // Handle the icon press event
+              // }}
       />
     ),
         }}
@@ -38,24 +38,24 @@ const AuthenticationScr = () => {
         size  = {24}
         color = "black"
         style = {{ marginRight: 10 }}
-            // onPress={() => {
-            //   // Handle the icon press event
-            // }}
+              // onPress={() => {
+              //   // Handle the icon press event
+              // }}
       />
     ),
         }} />
         <Stack.Screen name    = "Dictionary" component = {Dictionary}
                       options = {{ headerShown: true, headerTitleAlign: 'center', 
         headerRight: () => (
-          //  <Ionicons
-          //   name="notifications-outline"
-          //   size={24}
-          //   color="black"
-          //   style={{ marginRight: 10 }}
-          //   // onPress={() => {
-          //   //   // Handle the icon press event
-          //   // }}
-          // />
+            //  <Ionicons
+            //   name="notifications-outline"
+            //   size={24}
+            //   color="black"
+            //   style={{ marginRight: 10 }}
+            //   // onPress={() => {
+            //   //   // Handle the icon press event
+            //   // }}
+            // />
       <Image
       style  = {{width: 24, height: 24, tintColor: '#288400', marginRight: 15}}
       source = {require('../../img/mainApp/loading.png')}
@@ -65,7 +65,11 @@ const AuthenticationScr = () => {
           <Stack.Screen name    = "Edit Profile" component = {EditProfile}
                         options = {{ headerShown: true, headerTitleAlign: 'center',}} />
           <Stack.Screen name    = "UserChat" component     = {UserChat}
-                        options = {{ headerShown: true, headerTitleAlign: 'center', }}
+                        options = {({ route }) => ({
+    headerShown     : true,
+    headerTitleAlign: 'center',
+    title           : route.params.userName  // Closing parenthesis moved to the correct position
+  })}
         />
      
       </Stack.Navigator>

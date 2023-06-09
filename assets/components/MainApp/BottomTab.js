@@ -65,15 +65,16 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen name="Chats" component={Chats}
-       options={{
+       options={({ route }) => ({
             tabBarIcon: ({focused}) => {
                 return (
                     <View style={{alignItems: 'center', justifyContent: 'center', width: 80, height: 40, borderRadius: 8, backgroundColor:  focused ? '#2E8E05' : 'white' }}>
                     <Ionicons name="md-chatbox-outline" size={24} color={focused ? 'white' : 'black'}/>
                 </View>
                 )
-            }
-        }}
+            },
+            headerTitle           : 'Messages'
+        })}
          listeners={{
           tabPress: () => {
             navigation.navigate('Chats');

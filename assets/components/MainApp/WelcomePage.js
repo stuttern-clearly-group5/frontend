@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, StatusBar, Platform, SafeAreaView, FlatList, Bu
 import { useContext , useRef, useState} from 'react';
 import React from 'react';
 import { AuthContext } from '../authentication/Context';
-import { useNavigation, DrawerActions } from "@react-navigation/native";
+import { useNavigation, DrawerActions, useRoute } from "@react-navigation/native";
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import CustomTabs from './CustomTabs';
@@ -21,6 +21,7 @@ const Drawer = createDrawerNavigator();
 const WelcomePage = () => {
   const navigation = useNavigation();
   // const { logout } = useContext(AuthContext);
+  // const route = useRoute();
 
   const data = [
   { id: 0, title: "Basic Signs", videoUri: require('../../img/mainApp/video1.mp4'), time: 3 },
@@ -42,6 +43,7 @@ const WelcomePage = () => {
         />
         <Ionicons name="notifications-outline" size={26} color="black" />
       </View>
+      {/* <Text>Hi : {route.params.email}</Text> */}
       <View style={styles.flatlistView}>
         <FlatList
           data={data}

@@ -11,6 +11,7 @@ import { useForm, Controller } from 'react-hook-form';
 
 const Login = () => {
   const {control, handleSubmit, formState: {error}} = useForm();
+  const [email, setEmail] = useState('');
   
 
  const {login}                         = useContext(AuthContext);
@@ -23,6 +24,7 @@ const Login = () => {
 const onSignInPressed = (data) => {
 // console.log(data);
   login();
+  // login(email);
 }
 
   // const handleSignUp = () => {
@@ -66,7 +68,8 @@ const onSignInPressed = (data) => {
       render={({field: {value, onChange, onBlur}, fieldState : {error}}) => (
      <>
      <View      style  = {[styles.inputBox, { borderColor: error ? 'red': '#C8CDD0' }]}>
-     <TextInput value  = {value} onChangeText                                    = {onChange}  onBlur = {onBlur} placeholder = 'stutern@gmail.com' keyboardType = 'email-address' placeholderTextColor= '#D3D3D3' />
+     <TextInput value  = {value} onChangeText={(text) => {onChange(text); setEmail(text); }}
+     onBlur = {onBlur} placeholder = 'stutern@gmail.com' keyboardType = 'email-address' placeholderTextColor= '#D3D3D3' />
      <Image     source = {(require('../../img/authentication/email.png'))} style = {{width: 20, height: 20, tintColor: '#D3D3D3'}}/>
      </View>
          {error && (

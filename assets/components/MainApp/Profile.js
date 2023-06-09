@@ -50,7 +50,7 @@ const Profile = () => {
       </View>
 
       <View            style   = {styles.menuWrapper}>
-      <TouchableRipple onPress = {() => navigation.navigate('ResetPassWord')}>
+      <TouchableRipple onPress = {() => {}}>
       <View            style   = {styles.menuItem}>
       <Feather         name    = "lock" size = {24} color = "black" />
       <Text            style   = {styles.menuItemText}>Change Password</Text>

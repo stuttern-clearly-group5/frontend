@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 const Messages = [
   {
     id: '1',
-    userName: 'Jenny Doe',
+    userName: 'Sarah Peg',
     userImg: require('../../img/mainApp/user1.jpg'),
     messageTime: '4 mins ago',
     messageText:
