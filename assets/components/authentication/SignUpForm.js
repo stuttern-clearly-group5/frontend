@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView, Image, TouchableOpacity, ScrollView, Alert, } from 'react-native'
 import React, { useState } from 'react'
 import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { initializeApp } from "firebase/app";
 import CustomButton from './customButton';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
@@ -9,21 +11,77 @@ import { library } from '@fortawesome/fontawesome-svg-core';
   // import { auth } from './FireBase';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useForm, Controller } from 'react-hook-form';
-import { value } from 'deprecated-react-native-prop-types/DeprecatedTextInputPropTypes';
+// import { value } from 'deprecated-react-native-prop-types/DeprecatedTextInputPropTypes';
 
 library.add(faCheckSquare);
 
-const SignUpForm = () => {
-  const {control, handleSubmit, formState: {error}, watch}   = useForm();
-  const pwd = watch('password');
-  const navigation                                    = useNavigation();
-  const [showPassword, setShowPassword]               = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-const onSignUpPressed = (data) => {
-  // console.log(data);
-  navigation.navigate("EmailVerify");
-}
+// Add your Firebase configuration here
+const firebaseConfig = {
+  apiKey: "AIzaSyDkNqRKourFdoXR3Zk2yGrXdUsXvteEi7E",
+  authDomain: "clearly-68c14.firebaseapp.com",
+  databaseURL: "https://clearly-68c14-default-rtdb.firebaseio.com/",
+  projectId: "clearly-68c14",
+  storageBucket: "clearly-68c14.appspot.com",
+  messagingSenderId: "254125968574",
+  appId: "1:254125968574:web:b70c4f21a757b8ff1c22ef"
+};
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+
+
+
+const SignUpForm = () => {
+  const { control, handleSubmit, formState: { error }, watch } = useForm();
+  const pwd = watch('password');
+  const navigation = useNavigation();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+
+  const onSignUpPressed = async (data) => {
+    const { email, password } = data;
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      // console.log('User created:', user);
+      navigation.navigate("EmailVerify");
+     } catch (error) {
+      // console.log('Error signing up:', error);
+       Alert.alert('Error', 'Email already exists');
+    }
+  };
+
+const onGoogleSignUpPressed = async () => {
+  try {
+    const auth = getAuth();
+    const result = await signInWithPopup(auth, provider);
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const user = result.user;
+
+    // Create a new user with the email and password obtained from Google sign-in
+    await createUserWithEmailAndPassword(auth, user.email, null); // `null` can be replaced with a temporary password if required
+
+    // console.log('New user signed up with Google:', user);
+
+    navigation.navigate("EmailVerify");
+  } catch (error) {
+    // console.log('Error signing up with Google:', error);
+    Alert.alert('Error', 'Google sign up failed');
+  }
+};
+
+
+   
+// const onSignUpPressed = (data) => {
+//   // console.log(data);
+//   navigation.navigate("EmailVerify");
+// }
 
   // const handleSignUp = () => {
   //   auth
@@ -173,7 +231,7 @@ const onSignUpPressed = (data) => {
       <Text style = {{color: '#666', fontSize: 14}}>Or SignUp with</Text>
     </View>
     <View style = {{justifyContent: 'center', marginTop: 20, alignItems: 'center', flexDirection: 'row', gap: 10, marginBottom: 20}}>
-<TouchableOpacity>
+<TouchableOpacity onPress={onGoogleSignUpPressed}>
         <Image source = {require('../../img/authentication/GIcon.png')}
                style  = {{width: 40.87, height: 40.87,}}
       />

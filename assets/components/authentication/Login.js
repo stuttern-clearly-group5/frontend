@@ -1,17 +1,37 @@
-import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView, Image, TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView, Image, TouchableOpacity, Alert } from 'react-native'
 import React, { useState, useContext } from 'react'
 import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from './customButton';
 import { AuthContext } from './Context';
-  // import { auth } from './FireBase';
+import { initializeApp } from "firebase/app";
+import { getAuth , signInWithEmailAndPassword } from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useForm, Controller } from 'react-hook-form';
 
 
+// Add your Firebase configuration here
+const firebaseConfig = {
+  apiKey: "AIzaSyDkNqRKourFdoXR3Zk2yGrXdUsXvteEi7E",
+  authDomain: "clearly-68c14.firebaseapp.com",
+  databaseURL: "https://clearly-68c14-default-rtdb.firebaseio.com/",
+  projectId: "clearly-68c14",
+  storageBucket: "clearly-68c14.appspot.com",
+  messagingSenderId: "254125968574",
+  appId: "1:254125968574:web:b70c4f21a757b8ff1c22ef"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
+
 const Login = () => {
-  const {control, handleSubmit, formState: {error}} = useForm();
+  const { control, handleSubmit, formState: { errors } } = useForm();
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   
 
  const {login}                         = useContext(AuthContext);
@@ -21,11 +41,37 @@ const Login = () => {
     // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 
-const onSignInPressed = (data) => {
-// console.log(data);
-  login();
-  // login(email);
-}
+// const onSignInPressed = async (data) => {
+//   try {
+//     const { email, password } = data;
+//     await firebase.auth().signInWithEmailAndPassword(email, password);
+//     // Successfully logged in
+//     login();
+//   } catch (error) {
+//     // Handle login error
+//     console.log(error);
+//   }
+// };
+
+  const onSignInPressed = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        login();
+        // ...
+      })
+      .catch((error) => {
+  const errorCode = error.code;
+  const errorMessage = error.message;
+  Alert.alert('Error', 'Incorrect username/password');
+  // console.log(error);
+});
+  };
+
+  const onSubmit = () => {
+    onSignInPressed();
+  };
 
   // const handleSignUp = () => {
   //   auth
@@ -92,8 +138,11 @@ const onSignInPressed = (data) => {
       render={({field: {value, onChange, onBlur}, fieldState : {error}}) => (
         <>
       <View             style           = {[styles.inputBox, { borderColor: error ? 'red': '#C8CDD0'  }]}>
-      <TextInput        value           = {value}
-                        onChangeText    = {onChange}
+      <TextInput        value           = {value} 
+                        onChangeText={(text) => {
+            onChange(text);
+            setPassword(text); // Update the password state
+          }}
                         onBlur          = {onBlur}
                         keyboardType    = 'default'
                         secureTextEntry = {!showPassword}
@@ -121,12 +170,12 @@ const onSignInPressed = (data) => {
     </TouchableOpacity>
     </View>
         <View>
-        <CustomButton label   = {"Login"}
-                      onPress = {handleSubmit(onSignInPressed)}
-          // label={"Login"} onPress={()=> {login()}}
+              
+      <CustomButton
+        label="Login"
+        onPress={handleSubmit(onSubmit)}
+      />
 
-
-        />
         </View>
         <View style = {{flexDirection: 'row', justifyContent: 'center', marginTop: 10, alignItems: 'center', gap: 6}}>
         <Text style = {{color: '#666', fontSize: 14}}>Don't have an account? </Text>

@@ -80,10 +80,10 @@ const WelcomePage = () => {
         <CustomTabs label={"Speech\n to\n Text"} onPress={() => navigation.navigate('Speech To Text')} color={"#2E8E05"} />
         </View>
         <View style={styles.tabView}>
-        <CustomTabs label={"Need\n a\n translator?"} onPress={() => navigation.navigate('Speech To Text')} color={"#8E2005"} />
+        <CustomTabs label={"Need\n a\n translator?"} onPress={() => navigation.navigate('Need a translator')} color={"#8E2005"} />
         <CustomTabs label={"Dictionary"} onPress={() => navigation.navigate('Dictionary')} color={"#05738E"} />
         </View>
-        <CustomTabs label={"Learn Basic\n sign language"} onPress={() => navigation.navigate('Speech To Text')} color={"#052E8E"} />
+        <CustomTabs label={"Learn Basic\n sign language"} onPress={() => navigation.navigate("Basic Sign Language")} color={"#052E8E"} />
       </View>
     </SafeAreaView>
   );

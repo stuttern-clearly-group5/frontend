@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Platform, StatusBar, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
 import Voice from '@react-native-voice/voice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -31,17 +31,28 @@ const SpeechToText = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Press the button and start speaking.</Text>
-      <Button
-        title={isRecording ? 'Stop Recording' : 'Start Recording'}
+      <Text style={{paddingBottom: 5, textAlign: 'center'}}>Press the button and start speaking.</Text>
+      <TouchableOpacity
+        style={styles.button}
         onPress={isRecording ? stopRecording : startRecording}
-      />
-      <Text>Results:</Text>
-      <Text>{result}</Text>
+      >
+        <Text style={styles.buttonText}>
+          {isRecording ? 'Stop Recording' : 'Start Recording'}
+        </Text>
+      </TouchableOpacity>
+      <Text style={{paddingBottom: 10, paddingTop: 10}}>Result:</Text>
+      <View>
+        <TextInput
+          style={styles.input}
+          placeholder="Speech Translation....."
+          value={result}
+          onChangeText={(text) => setResult(text)}
+          multiline={true}
+        />
+      </View>
       {error && <Text>{error.toString()}</Text>}
-      {/* <Text>{error}</Text> */}
     </View>
-  ); 
+  );
 };
 
 export default SpeechToText;
@@ -49,8 +60,29 @@ export default SpeechToText;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     backgroundColor: 'white',
     paddingHorizontal: 24,
+  },
+  button: {
+    backgroundColor: '#2E8E05',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+  },
+  input: {
+    height: 200,
+    fontSize: 18,
+    color: 'black',
+    borderColor: 'gray',
+    borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: '#EEEEEE',
   },
 });

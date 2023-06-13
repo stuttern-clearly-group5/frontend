@@ -8,6 +8,8 @@ import { Ionicons } from '@expo/vector-icons';
 import Dictionary from '../MainApp/Dictionary';
 import EditProfile from '../MainApp/EditProfile';
 import UserChat from '../MainApp/UserChat';
+import BasicSignLanguage from '../MainApp/BasicSignLanguage';
+import NeedTranslator from '../MainApp/NeedTranslator';
 
 const Stack = createStackNavigator();
 
@@ -23,9 +25,9 @@ const AuthenticationScr = () => {
         size  = {24}
         color = "black"
         style = {{ marginRight: 10 }}
-              // onPress={() => {
-              //   // Handle the icon press event
-              // }}
+                // onPress={() => {
+                //   // Handle the icon press event
+                // }}
       />
     ),
         }}
@@ -38,24 +40,24 @@ const AuthenticationScr = () => {
         size  = {24}
         color = "black"
         style = {{ marginRight: 10 }}
-              // onPress={() => {
-              //   // Handle the icon press event
-              // }}
+                // onPress={() => {
+                //   // Handle the icon press event
+                // }}
       />
     ),
         }} />
         <Stack.Screen name    = "Dictionary" component = {Dictionary}
                       options = {{ headerShown: true, headerTitleAlign: 'center', 
         headerRight: () => (
-            //  <Ionicons
-            //   name="notifications-outline"
-            //   size={24}
-            //   color="black"
-            //   style={{ marginRight: 10 }}
-            //   // onPress={() => {
-            //   //   // Handle the icon press event
-            //   // }}
-            // />
+              //  <Ionicons
+              //   name="notifications-outline"
+              //   size={24}
+              //   color="black"
+              //   style={{ marginRight: 10 }}
+              //   // onPress={() => {
+              //   //   // Handle the icon press event
+              //   // }}
+              // />
       <Image
       style  = {{width: 24, height: 24, tintColor: '#288400', marginRight: 15}}
       source = {require('../../img/mainApp/loading.png')}
@@ -71,6 +73,36 @@ const AuthenticationScr = () => {
     title           : route.params.userName  // Closing parenthesis moved to the correct position
   })}
         />
+
+        <Stack.Screen name    = "Basic Sign Language" component = {BasicSignLanguage}
+                      options = {{ headerShown: true, headerTitleAlign: 'center', 
+        headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+                // onPress={() => {
+                //   // Handle the icon press event
+                // }}
+      />
+    ),
+        }} />
+
+        <Stack.Screen name    = "Need a translator" component = {NeedTranslator}
+                      options = {{ headerShown: true, headerTitleAlign: 'center', 
+        headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+                // onPress={() => {
+                //   // Handle the icon press event
+                // }}
+      />
+    ),
+        }} />
      
       </Stack.Navigator>
   )

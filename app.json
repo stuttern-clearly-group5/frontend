@@ -9,7 +9,11 @@
     "splash": {
       "image": "./assets/img/onboardingimg/clearSplashScreen.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "permissions": [
+      "RECORD_AUDIO",
+      "MODIFY_AUDIO_SETTINGS"
+    ]
     },
     "assetBundlePatterns": [
       "**/*"
