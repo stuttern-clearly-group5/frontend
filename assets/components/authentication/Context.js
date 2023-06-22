@@ -1,9 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { createContext, useEffect, useState } from 'react'
-
-
-import { Alert } from 'react-native';
-
+import React, { createContext, useEffect, useState } from 'react';
+import { Alert, StyleSheet } from 'react-native';
 
 export const AuthContext = createContext();
 
@@ -26,6 +23,10 @@ export const AuthProvider = ({ children }) => {
         {
           text: 'No',
           style: 'cancel',
+          // Optional: Add custom style for "No" button
+          // For example, you can set the text color to white and background color to red
+          textStyle: { color: 'white' },
+          style: { backgroundColor: 'red', borderRadius: 8 },
         },
         {
           text: 'Yes',
@@ -35,6 +36,10 @@ export const AuthProvider = ({ children }) => {
             AsyncStorage.removeItem('userToken');
             setIsLoading(false);
           },
+          // Optional: Add custom style for "Yes" button
+          // For example, you can set the text color to white and background color to green
+          textStyle: { color: 'white' },
+          style: { backgroundColor: 'green', borderRadius: 8 },
         },
       ],
       { cancelable: false }
@@ -56,9 +61,7 @@ export const AuthProvider = ({ children }) => {
     isLoggedIn();
   }, []);
 
-    return (
-    <AuthContext.Provider value={{login , logout, isLoading, userToken }}>
-        {children}
-    </AuthContext.Provider>
-    )
-}
+  return (
+    <AuthContext.Provider value={{ login, logout, isLoading, userToken }}>{children}</AuthContext.Provider>
+  );
+};

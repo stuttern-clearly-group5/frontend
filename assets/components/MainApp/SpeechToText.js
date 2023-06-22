@@ -30,8 +30,8 @@ const SpeechToText = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={{paddingBottom: 5, textAlign: 'center'}}>Press the button and start speaking.</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={{paddingBottom: 5, textAlign: 'center', paddingTop: 20}}>Press the button and start speaking.</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={isRecording ? stopRecording : startRecording}
@@ -51,7 +51,7 @@ const SpeechToText = () => {
         />
       </View>
       {error && <Text>{error.toString()}</Text>}
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: 24,
+    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   button: {
     backgroundColor: '#2E8E05',

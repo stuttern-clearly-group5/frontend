@@ -7,6 +7,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import CustomButton from './customButton';
 
 
+
 library.add(faEnvelope);
 
 const EmailVerify = () => {
@@ -17,7 +18,7 @@ const EmailVerify = () => {
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Please verify your email</Text>
       <FontAwesomeIcon icon={faEnvelope} bounce style={{ color: '#42da00', alignSelf: 'center', marginTop: 30 }} size={120} />
-      <Text style={{fontSize: 12, marginBottom: 42}}>we have sent a mail to stutern@gmail.com. Kindly click on the link in the mail to verify your email address.</Text>  
+      <Text style={{fontSize: 12, marginBottom: 42}}>we have sent a mail to you. Kindly click on the link in the mail to verify your email address.</Text>  
       
 
       <CustomButton label={"Open Email App"} onPress={() => navigation.navigate('SecondEmailVerify')}/>

@@ -2,7 +2,7 @@
   "expo": {
     "name": "clearly_app",
     "slug": "clearly_app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/iconWhiteBack.png",
     "userInterfaceStyle": "light",
@@ -11,9 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff",
       "permissions": [
-      "RECORD_AUDIO",
-      "MODIFY_AUDIO_SETTINGS"
-    ]
+        "RECORD_AUDIO",
+        "MODIFY_AUDIO_SETTINGS"
+      ]
     },
     "assetBundlePatterns": [
       "**/*"
@@ -26,20 +26,37 @@
         "foregroundImage": "./assets/iconWhiteBack.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["android.permission.RECORD_AUDIO"],
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_WIFI_STATE",
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.CAMERA",
+        "android.permission.BLUETOOTH",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_PHONE_STATE",
+        "android.permission.WAKE_LOCK",
+        "android.permission.VIBRATE"
+      ],
       "package": "com.anonymous.clearly_app"
     },
     "web": {
       "favicon": "./assets/iconWhiteBack.png"
     },
     "plugins": [
-  [
-    "@react-native-voice/voice",
-    {
-      "microphonePermission": "Allow Voice to Text Tutorial to access the microphone",
-      "speechRecognitionPermission": "Allow Voice to Text Tutorial to securely recognize user speech"
+      [
+        "@react-native-voice/voice",
+        {
+          "microphonePermission": "Allow Voice to Text Tutorial to access the microphone",
+          "speechRecognitionPermission": "Allow Voice to Text Tutorial to securely recognize user speech"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d27ff0d8-b1ca-45ef-bf49-f76c983c8d92"
+      }
     }
-  ]
-]
   }
 }

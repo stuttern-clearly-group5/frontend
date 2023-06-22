@@ -14,6 +14,7 @@ import { Video, ResizeMode } from 'expo-av';
 import Dictionary from './Dictionary'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Settings from './Settings';
 
 
 const Drawer = createDrawerNavigator();
@@ -113,6 +114,15 @@ const DrawerNavigator = () => (
       component={SpeechToText}
       options={{
         drawerIcon: ({ color, size }) => <Ionicons name="mic-outline" size={size} color= 'purple' />,
+        headerShown: true, headerTitleAlign: 'center',
+         headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+      />
+    ),
       }}
     />
     <Drawer.Screen
@@ -120,13 +130,31 @@ const DrawerNavigator = () => (
       component={Chats}
       options={{
         drawerIcon: ({ color, size }) => <Ionicons name="chatbubble-ellipses-outline" size={size} color="green" />,
+        headerShown: true, headerTitleAlign: 'center',
+         headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+      />
+    ),
       }}
     />
     <Drawer.Screen
       name="Settings"
-      component={SpeechToText}
+      component={Settings}
       options={{
         drawerIcon: ({ color, size }) => <Ionicons name="md-settings-outline" size={24} color="purple" />,
+        headerShown: true, headerTitleAlign: 'center',
+         headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+      />
+    ),
       }}
     />
       <Drawer.Screen
@@ -134,6 +162,15 @@ const DrawerNavigator = () => (
       component={SpeechToText}
       options={{
         drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="file-image-outline" size={24} color="blue" />,
+        headerShown: true, headerTitleAlign: 'center',
+         headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+      />
+    ),
       }}
     />
     <Drawer.Screen
@@ -141,6 +178,13 @@ const DrawerNavigator = () => (
       component={Dictionary}
       options={{
         drawerIcon: ({ color, size }) => <AntDesign name="book" size={size} color='red'/>,
+         headerShown: true, headerTitleAlign: 'center',
+         headerRight: () => (
+      <Image
+      style  = {{width: 24, height: 24, tintColor: '#288400', marginRight: 15}}
+      source = {require('../../img/mainApp/loading.png')}
+      />
+    ),
       }}
     />
   </Drawer.Navigator>

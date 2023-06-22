@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
 import { useContext } from 'react';
 import { AuthContext } from '../authentication/Context';
@@ -9,6 +9,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 import greenLogoNew from '../../img/mainApp/greenLogoNew.png'
 
 const CustomDrawer = (props) => {
+
+    const Privacy = () => {
+    // console.log("Privacy function");
+    Alert.alert("Privacy Policy", 
+    "All user information inputted on clearly app are kept secret from third parties. This is done to ensure confidentiality and in accordance with the government's privacy protection policies.",
+    )
+  };
+
     const { logout } = useContext(AuthContext);
     return(
         // <ScrollView>
@@ -45,11 +53,11 @@ const CustomDrawer = (props) => {
                 <Text style={{fontSize: 15, marginLeft: 5, }} >Feedback</Text>
             </View>
             </TouchableOpacity>
-                <TouchableOpacity onPress={()=>{}} style={{paddingVertical: 10}}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <MaterialIcons name="privacy-tip" size={22} color="purple" />
-                <Text style={{fontSize: 15, marginLeft: 5, }} >Privacy Policy</Text>
-            </View>
+                <TouchableOpacity onPress={Privacy} style={{paddingVertical: 10}}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                 <MaterialIcons name="privacy-tip" size={22} color="purple" />
+                <Text style={{fontSize: 15, marginLeft: 5}} >Privacy Policy</Text>
+                </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => { logout() }} style={{paddingVertical: 10}}>
             <View style={{marginBottom: 67,flexDirection: 'row', alignItems: 'center'}}>

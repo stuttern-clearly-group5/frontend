@@ -10,6 +10,12 @@ import EditProfile from '../MainApp/EditProfile';
 import UserChat from '../MainApp/UserChat';
 import BasicSignLanguage from '../MainApp/BasicSignLanguage';
 import NeedTranslator from '../MainApp/NeedTranslator';
+import ChangePassword from '../MainApp/ChangePassword';
+import Avatar from '../MainApp/Avatar';
+import Settings from '../MainApp/Settings';
+import HelpAndSupport from '../MainApp/HelpAndSupport';
+import TermsOfService from '../MainApp/TermsOfService';
+import VideoCallScreen from '../MainApp/VideoCallScreen';
 
 const Stack = createStackNavigator();
 
@@ -100,6 +106,80 @@ const AuthenticationScr = () => {
                 // onPress={() => {
                 //   // Handle the icon press event
                 // }}
+      />
+    ),
+        }} />
+
+        <Stack.Screen name    = "Change Password" component = {ChangePassword}
+                      options = {{ headerShown: true, headerTitleAlign: 'center', 
+        headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+                // onPress={() => {
+                //   // Handle the icon press event
+                // }}
+      />
+    ),
+        }} />
+
+          <Stack.Screen name    = "Avatar" component = {Avatar}
+                      options = {{ headerShown: true, headerTitleAlign: 'center', 
+        headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+      />
+    ),
+        }} />
+
+        <Stack.Screen name    = "Settings" component = {Settings}
+                      options = {{ headerShown: true, headerTitleAlign: 'center', 
+        headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+      />
+    ),
+        }} />
+
+        <Stack.Screen name    = "Help and Support" component = {HelpAndSupport}
+                      options = {{ headerShown: true, headerTitleAlign: 'center', 
+        headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+      />
+    ),
+        }} />
+        <Stack.Screen name    = "Terms Of Service" component = {TermsOfService}
+                      options = {{ headerShown: true, headerTitleAlign: 'center', 
+        headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+      />
+    ),
+        }} />
+
+        <Stack.Screen name    = "Video Call" component = {VideoCallScreen}
+                      options = {{ headerShown: true, headerTitleAlign: 'center', 
+        headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
       />
     ),
         }} />

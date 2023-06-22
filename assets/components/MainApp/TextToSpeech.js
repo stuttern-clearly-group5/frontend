@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     // marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     backgroundColor: '#F5FCFF',
     paddingHorizontal: 24,
+
   },
   input: {
     height: 200,

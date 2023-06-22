@@ -59,9 +59,9 @@ const Chats = () => {
 
     return (
       <SafeAreaView style={styles.container}>
-      <View>
+      {/* <View>
         <Text style={{marginTop: 20, fontSize: 24, fontWeight: 'bold',}}>Chats</Text>
-      </View>
+      </View> */}
         <FlatList 
           data={Messages}
           keyExtractor={item=>item.id}
