@@ -22,7 +22,7 @@ const Settings = ({ navigation }) => {
   };
 
   const navigateToSupport = () => {
-    console.log("Support function");
+    // console.log("Support function");
     navigation.navigate('Help and Support');
   };
 

@@ -37,7 +37,8 @@
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.READ_PHONE_STATE",
         "android.permission.WAKE_LOCK",
-        "android.permission.VIBRATE"
+        "android.permission.VIBRATE",
+        "CAMERA", "RECORD_AUDIO"
       ],
       "package": "com.anonymous.clearly_app"
     },

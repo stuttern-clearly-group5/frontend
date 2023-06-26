@@ -49,10 +49,10 @@ useEffect(() => {
   return (
     isAppFirstLaunched != null && (
         <Stack.Navigator screenOptions = {{ headerShown: false }}>
-        {isAppFirstLaunched && (<Stack.Screen name="FirstScreen" component={FirstScreen} />)}
-        {isAppFirstLaunched && (<Stack.Screen name="Onboarding" component={Onboarding} />)}
-        {/* <Stack.Screen name="FirstScreen" component={FirstScreen} />
-        <Stack.Screen name="Onboarding" component={Onboarding} /> */}
+        {/* {isAppFirstLaunched && (<Stack.Screen name="FirstScreen" component={FirstScreen} />)}
+        {isAppFirstLaunched && (<Stack.Screen name="Onboarding" component={Onboarding} />)} */}
+        <Stack.Screen name="FirstScreen" component={FirstScreen} />
+        <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="SignUpForm" component={SignUpForm} />
         <Stack.Screen name="Login" component={Login} />

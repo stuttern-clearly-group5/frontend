@@ -1,4 +1,4 @@
-import { Platform, StatusBar, StyleSheet, View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, SafeAreaView, TouchableOpacity, Switch } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { Feather } from '@expo/vector-icons';
@@ -24,6 +24,7 @@ const Profile = () => {
   const { logout } = useContext(AuthContext);
   const { toggleTheme } = useContext(ThemeContext);
   const [profilePictureURI, setProfilePictureURI] = useState(null);
+  const [mode, setMode] = useState(false);
 
   useEffect(() => {
     if (isFocused) {
@@ -90,7 +91,7 @@ const Profile = () => {
         <TouchableRipple onPress = {() => {}}>
         <View            style   = {styles.menuItem}>
         <Ionicons        name    = "md-notifications-outline" size = {24} color = "black" />
-        <Text            style   = {styles.menuItemText}>notifications</Text>
+        <Text            style   = {styles.menuItemText}>Notifications</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress = {() => navigation.navigate('Settings')}>
@@ -106,10 +107,13 @@ const Profile = () => {
           </View>
         </TouchableRipple>
         <TouchableRipple        onPress = {() => {toggleTheme()}}>
-        <View                   style   = {styles.menuItem}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View                   style   = {styles.menuItem}>
         <MaterialCommunityIcons name    = "theme-light-dark" size = {24} color = "black" />
         <Text                   style   = {styles.menuItemText}>Theme</Text>
           </View>
+          <Switch value={mode} onValueChange={() => setMode((value) => !value)} />
+        </View>
         </TouchableRipple>
         <TouchableRipple onPress = {() => { logout() }} >
         <View            style   = {styles.menuItem}>

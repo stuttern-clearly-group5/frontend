@@ -37,6 +37,7 @@ const Options = () => {
           label = {'Favorites'}
         />
         <OptionsButton 
+          onPress = {() => navigation.navigate('Need a translator')}
           icon  = {<MaterialCommunityIcons name="file-download-outline" size={24} color="black" />}
           label = {'Saved images'}
         />
