@@ -8,6 +8,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth , signInWithEmailAndPassword } from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useForm, Controller } from 'react-hook-form';
+import themeContext from '../MainApp/ThemeContext';
 
 
 // Add your Firebase configuration here
@@ -32,6 +33,7 @@ const Login = () => {
   const { control, handleSubmit, formState: { errors } } = useForm();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const theme = useContext(themeContext);
   
 
  const {login}                         = useContext(AuthContext);
@@ -92,16 +94,16 @@ const Login = () => {
     // };
 
   return (
-    <SafeAreaView style = {styles.container}>
+    <SafeAreaView style = {[styles.container, {backgroundColor: theme.background}]}>
     <View         style = {{alignItems: 'center',}}>
       <Image 
       source = {require('../../img/authentication/clearlyLogo.png')}
       style  = {{width: 108.52, height: 38.57, marginTop: 33, marginBottom: 14.43}}
       />
-      <Text style = {{fontSize: 24, fontWeight: 400, textAlign: 'center', marginTop: 10}}>Login</Text>
+      <Text style = {{fontSize: 24, fontWeight: 400, textAlign: 'center', marginTop: 10, color: theme.color}}>Login</Text>
       <Text style = {{fontSize: 14, fontWeight: 400, textAlign: 'center', color: '#8C8C8C', marginTop: 10}}>Welcome back. Please sign in to continue</Text>
       </View>
-     <Text style = {styles.inputLabel} >Email</Text>
+     <Text style = {[styles.inputLabel, { color: theme.color}]} >Email</Text>
         <Controller
       control = {control}
       name    = "email"
@@ -124,7 +126,7 @@ const Login = () => {
      </>
     )}
     />      
-    <Text style = {styles.inputLabel}>Password</Text>
+    <Text style = {[styles.inputLabel, { color: theme.color}]}>Password</Text>
       <Controller
       control = {control}
       name    = "password"

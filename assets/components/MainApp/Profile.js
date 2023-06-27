@@ -17,18 +17,23 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {EventRegister} from "react-native-event-listeners";
+import themeContext from '../MainApp/ThemeContext';
+
+
 
 const Profile = () => {
+  const theme = useContext(themeContext);
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const { logout } = useContext(AuthContext);
-  const { toggleTheme } = useContext(ThemeContext);
   const [profilePictureURI, setProfilePictureURI] = useState(null);
   const [mode, setMode] = useState(false);
 
   useEffect(() => {
     if (isFocused) {
       loadProfilePictureURI();
+      loadTheme();
     }
   }, [isFocused]);
 
@@ -43,11 +48,33 @@ const Profile = () => {
     }
   };
 
+  const loadTheme = async () => {
+    try {
+      const storedTheme = await AsyncStorage.getItem('theme');
+      if (storedTheme !== null) {
+        setMode(storedTheme === 'dark');
+      }
+    } catch (error) {
+      console.log('Error loading theme:', error);
+    }
+  };
+
+  const toggleTheme = async (value) => {
+    setMode(value);
+    const themeValue = value ? 'dark' : 'light';
+    try {
+      await AsyncStorage.setItem('theme', themeValue);
+      EventRegister.emit('changeTheme', value);
+    } catch (error) {
+      console.log('Error saving theme:', error);
+    }
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
       <View style={styles.userInfoSection}>
         <Caption style={{ color: 'white', fontSize: 24, paddingTop: 35, paddingBottom: 10, textAlign: 'center' }}>Profile</Caption>
-        <View style={styles.AvatarBoxShadowView}>
+        <View style={[styles.AvatarBoxShadowView, { backgroundColor: theme.background }]}>
           <TouchableOpacity onPress={() => navigation.navigate("Edit Profile")}>
             {profilePictureURI ? (
               <Avatar.Image
@@ -68,9 +95,9 @@ const Profile = () => {
           </TouchableOpacity>
           <View>
             {/* Replace with user full name {full name} */}
-            <Title style={styles.title}>John Doe</Title>
+            <Title style={[styles.title, {color: theme.color}]}>John Doe</Title>
             {/* Replace with user name {username} */}
-            <Caption style={styles.caption}>aamanuels</Caption>
+            <Caption style={[styles.caption, {color: theme.color}]}>aamanuels</Caption>
           </View>
         </View>
       </View>
@@ -78,47 +105,50 @@ const Profile = () => {
       <View style={styles.menuWrapper}>
         <TouchableRipple onPress={() => navigation.navigate("Change Password")}>
           <View style={styles.menuItem}>
-            <Feather name="lock" size={24} color="black" />
-            <Text style={styles.menuItemText}>Change Password</Text>
+            <Feather name="lock" size={24} color={theme.color} />
+            <Text style={[styles.menuItemText, {color: theme.color}]}>Change Password</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={() => navigation.navigate("Avatar")}>
           <View style={styles.menuItem}>
-            <Ionicons name="person-outline" size={24} color="black" />
-            <Text style={styles.menuItemText}>Avatar</Text>
+            <Ionicons name="person-outline" size={24} color={theme.color} />
+            <Text style={[styles.menuItemText, {color: theme.color}]}>Avatar</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress = {() => {}}>
         <View            style   = {styles.menuItem}>
-        <Ionicons        name    = "md-notifications-outline" size = {24} color = "black" />
-        <Text            style   = {styles.menuItemText}>Notifications</Text>
+        <Ionicons        name    = "md-notifications-outline" size = {24} color={theme.color} />
+        <Text            style   = {[styles.menuItemText, {color: theme.color}]}>Notifications</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress = {() => navigation.navigate('Settings')}>
         <View            style   = {styles.menuItem}>
-        <Ionicons        name    = "settings-outline" size = {24} color = "black" />
-        <Text            style   = {styles.menuItemText}>Settings</Text>
+        <Ionicons        name    = "settings-outline" size = {24} color={theme.color} />
+        <Text            style   = {[styles.menuItemText, {color: theme.color}]}>Settings</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress = {() => {}}>
         <View            style   = {styles.menuItem}>
-        <Ionicons        name    = "globe-outline" size = {24} color = "black" />
-        <Text            style   = {styles.menuItemText}>App language</Text>
+        <Ionicons        name    = "globe-outline" size = {24} color={theme.color}  />
+        <Text            style   = {[styles.menuItemText, {color: theme.color}]}>App language</Text>
           </View>
         </TouchableRipple>
-        <TouchableRipple        onPress = {() => {toggleTheme()}}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <View                   style   = {styles.menuItem}>
-        <MaterialCommunityIcons name    = "theme-light-dark" size = {24} color = "black" />
-        <Text                   style   = {styles.menuItemText}>Theme</Text>
+        <TouchableRipple onPress={() => toggleTheme(!mode)}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={styles.menuItem}>
+              <MaterialCommunityIcons name="theme-light-dark" size={24} color={theme.color} />
+              <Text style={[styles.menuItemText, { color: theme.color }]}>Theme</Text>
+            </View>
+            <Switch
+              value={mode}
+              onValueChange={(value) => toggleTheme(value)}
+            />
           </View>
-          <Switch value={mode} onValueChange={() => setMode((value) => !value)} />
-        </View>
         </TouchableRipple>
         <TouchableRipple onPress = {() => { logout() }} >
         <View            style   = {styles.menuItem}>
-        <MaterialIcons   name    = "logout" size = {24} color = "black" />
-        <Text            style   = {styles.menuItemText}>Logout</Text>
+        <MaterialIcons   name    = "logout" size = {24} color={theme.color}  />
+        <Text            style   = {[styles.menuItemText, {color: theme.color}]}>Logout</Text>
           </View>
         </TouchableRipple>
       </View>

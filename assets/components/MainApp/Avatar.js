@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, SafeAreaView, View, Image, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../authentication/customButton';
+import themeContext from './ThemeContext';
 
 export default function Avatar() {
   const [imageURI, setImageURI] = useState(null);
+  const theme = useContext(themeContext);
 
   const saveImageURI = async (uri) => {
     try {
@@ -53,7 +55,7 @@ export default function Avatar() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
       <View style={styles.container}>
         {imageURI ? (
           <Image source={{ uri: imageURI }} style={styles.avatar} />
@@ -61,7 +63,7 @@ export default function Avatar() {
           <Text>No avatar selected</Text>
         )}
         <View>
-          <Text style={{textAlign: 'center', fontSize: 24, fontWeight: '400', marginTop: 22,}}>Create your own Avatar</Text>
+          <Text style={{textAlign: 'center', fontSize: 24, fontWeight: '400', marginTop: 22, color: theme.color}}>Create your own Avatar</Text>
           <Text style={{textAlign: 'center',color: '#B2BEB5', fontSize: 12,fontWeight: '800',}}>Be anything that you've always wanted</Text>
           <Text style={{textAlign: 'center',color: '#B2BEB5', fontSize: 12,fontWeight: '800',}}>be creative and explore</Text>
         </View>

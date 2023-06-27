@@ -2,15 +2,17 @@ import { Platform, StatusBar, StyleSheet, Text, View, SafeAreaView } from 'react
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React from 'react'
+import React,  { useContext } from 'react'
 import OptionsButton from './OptionsButton';
 import { useNavigation } from "@react-navigation/native";
+import themeContext from './ThemeContext';
 
 const Options = () => {
   const navigation = useNavigation();
+  const theme = useContext(themeContext);
 
   return (
-    <SafeAreaView style = {styles.container}>
+    <SafeAreaView style = {[styles.container, {backgroundColor: theme.background}]}>
     <View         style = {styles.header}>
         <View>
           <Text style = {{color: 'white', fontSize: 16}}>Keyboard Settings</Text>

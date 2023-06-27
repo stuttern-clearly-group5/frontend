@@ -15,12 +15,17 @@ import Dictionary from './Dictionary'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Settings from './Settings';
+import themeContext from './ThemeContext';
+import theme from './Theme';
+
 
 
 const Drawer = createDrawerNavigator();
 
 const WelcomePage = () => {
   const navigation = useNavigation();
+  const theme = useContext(themeContext);
+  
   // const { logout } = useContext(AuthContext);
   // const route = useRoute();
 
@@ -34,15 +39,15 @@ const WelcomePage = () => {
   const [status, setStatus] = useState({});
   
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, {backgroundColor: theme.background}]}>
       <View style={styles.headerIcons}>
         <Feather
           name="menu"
           size={26}
-          color="black"
+          color={theme.color}
           onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
         />
-        <Ionicons name="notifications-outline" size={26} color="black" />
+        <Ionicons name="notifications-outline" size={26} color={theme.color}/>
       </View>
       {/* <Text>Hi : {route.params.email}</Text> */}
       <View style={styles.flatlistView}>
@@ -91,11 +96,13 @@ const WelcomePage = () => {
 }
 
 const DrawerNavigator = () => (
+
   <Drawer.Navigator 
   drawerContent={props => <CustomDrawer{...props}/>}
   screenOptions={{ headerShown: false, 
   drawerLabelStyle:{marginLeft: -25}, 
   fontSize: 15,
+  color: theme.color,
   // drawerContentStyle: { marginVertical: 0, }, // Adjust the vertical margin as per your needs
   drawerActiveBackgroundColor: '#42DA00',
   drawerInactiveTintColor: 'black',
@@ -106,7 +113,7 @@ const DrawerNavigator = () => (
       name="Welcome"
       component={WelcomePage}
       options={{
-        drawerIcon: ({ color, size }) => <Feather name="home" size={size} color={color} />,
+        drawerIcon: ({ color, size }) => <Feather name="home" size={size} color={theme.color} />,
       }}
     />
     <Drawer.Screen
@@ -119,7 +126,7 @@ const DrawerNavigator = () => (
        <Ionicons
         name  = "notifications-outline"
         size  = {24}
-        color = "black"
+        color = {theme.color}
         style = {{ marginRight: 10 }}
       />
     ),

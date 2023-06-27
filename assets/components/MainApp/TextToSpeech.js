@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Button, TouchableOpacity, Platform, StatusBar, KeyboardAvoidingView, SafeAreaView, TextInput } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { useNavigation } from "@react-navigation/native";
 import * as Speech from 'expo-speech';
 import { Audio } from 'expo';
@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
+import themeContext from './ThemeContext';
 
 
 
@@ -15,7 +16,7 @@ const TextToSpeech = () => {
   const [iptValue, setIptValue] = useState('');
   // const [volume, setVolume] = useState(3); // Initial volume value (between 0 and 3)
   // const soundRef = useRef(null);
-
+  const theme = useContext(themeContext);
   const thingToSay = iptValue;
 
   const speak = async () => {
@@ -51,7 +52,7 @@ const TextToSpeech = () => {
 //   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.background}]}>
       <Text style={{color: '#8C8C8C', fontSize: 16}}>Convert text into natural sounding voices. Try it now</Text>
       <TextInput
         style={styles.input}

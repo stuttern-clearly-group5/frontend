@@ -1,12 +1,15 @@
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
+import themeContext from './ThemeContext';
 
 const OptionsButton = ({label, onPress, icon}) => {
+  const theme = useContext(themeContext);
+
   return (
         <TouchableOpacity onPress = {onPress}
                           style   = {styles.button}>
             <View>{icon}</View>
-          <Text style = {{fontWeight: 500, fontSize: 15, color: '#3E3E3E', textAlign: 'center', marginTop: 18}}>{label} </Text>
+          <Text style = {{fontWeight: 500, fontSize: 15, color: theme.color, textAlign: 'center', marginTop: 18}}>{label} </Text>
         </TouchableOpacity>
         
   )

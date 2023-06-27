@@ -7,8 +7,9 @@ import '@firebase/auth';
 import { initializeApp } from "firebase/app";
 import CustomInput from '../authentication/CustomInput';
 import CustomButton from '../authentication/customButton';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import themeContext from './ThemeContext';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDkNqRKourFdoXR3Zk2yGrXdUsXvteEi7E",
@@ -29,6 +30,7 @@ const ChangePassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { control, handleSubmit } = useForm();
   const navigation = useNavigation();
+  const theme = useContext(themeContext);
 
     const toggleShowOldPassword = () => {
     setShowOldPassword(!showOldPassword);
@@ -67,10 +69,10 @@ const ChangePassword = () => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
+    <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor: theme.background}}>
+      <View style={[styles.root, {backgroundColor: theme.background }]}>
         <View style={{ alignItems: 'center' }}>
-          <Text style={{ color: '#8C8C8C', fontSize: 12 }}>Enter old password</Text>
+          <Text style={{ color: theme.color , fontSize: 12 }}>Enter old password</Text>
 
           <CustomInput
             name="oldPassword"
@@ -120,6 +122,7 @@ const ChangePassword = () => {
 const styles = StyleSheet.create({
   root: {
     padding: 20,
+    flex: 1,
   },
   title: {
     fontSize: 24,

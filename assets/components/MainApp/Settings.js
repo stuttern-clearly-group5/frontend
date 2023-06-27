@@ -1,10 +1,14 @@
 import { View, Text, TouchableOpacity, ScrollView, Alert } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import themeContext from './ThemeContext';
+
 
 const Settings = ({ navigation }) => {
+  const theme = useContext(themeContext);
+
   const navigateToEditProfile = () => {
     navigation.navigate("Edit Profile");
   };
@@ -63,14 +67,16 @@ const Settings = ({ navigation }) => {
         paddingVertical: 8,
         paddingLeft: 12,
         marginBottom: 25,
+        
       }}
     >
-      <MaterialIcons name={icon} size={24} color="black" />
+      <MaterialIcons name={icon} size={24} color={theme.color}/>
       <Text
         style={{
           marginLeft: 36,
           fontWeight: 400,
           fontSize: 16,
+          color: theme.color
         }}
       >
         {text}{" "}
@@ -82,7 +88,7 @@ const Settings = ({ navigation }) => {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: theme.background,
       }}
     >
       <ScrollView style={{ marginHorizontal: 12 }}>

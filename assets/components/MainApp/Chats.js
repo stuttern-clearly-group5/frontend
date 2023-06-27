@@ -1,6 +1,7 @@
-import React from 'react';
+import React , { useContext } from 'react';
 import { View, Text, Button, StyleSheet, FlatList, TouchableOpacity, Image, SafeAreaView, Platform, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import themeContext from './ThemeContext';
 
 const Messages = [
   {
@@ -56,9 +57,10 @@ const Messages = [
 const Chats = () => {
 
   const navigation = useNavigation();
+  const theme = useContext(themeContext);
 
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={[styles.container, {backgroundColor: theme.background } ]}>
       {/* <View>
         <Text style={{marginTop: 20, fontSize: 24, fontWeight: 'bold',}}>Chats</Text>
       </View> */}
@@ -66,17 +68,17 @@ const Chats = () => {
           data={Messages}
           keyExtractor={item=>item.id}
           renderItem={({item}) => (
-            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("UserChat", {userName: item.userName})}>
-              <View style={styles.userInfo}>
-                <View style={styles.UserImgWrapper}>
+            <TouchableOpacity style={[styles.card, {backgroundColor: theme.background } ]} onPress={() => navigation.navigate("UserChat", {userName: item.userName})}>
+              <View style={[styles.userInfo, {backgroundColor: theme.background } ]}>
+                <View style={[styles.UserImgWrapper, {backgroundColor: theme.background } ]}>
                   <Image style={styles.userImg} source={item.userImg} />
                 </View>
-                <View style={styles.TextSection}>
-                  <View style = {styles.UserInfoText}>
-                    <Text style={styles.userName}>{item.userName}</Text>
-                    <Text style={styles.PostTime}>{item.messageTime}</Text>
+                <View style={[styles.TextSection, {backgroundColor: theme.background } ]}>
+                  <View style = {[styles.UserInfoText, {backgroundColor: theme.background } ]}>
+                    <Text style={[styles.userName, {color: theme.color}]}>{item.userName}</Text>
+                    <Text style={[styles.PostTime, {color: theme.color}]}>{item.messageTime}</Text>
                   </View>
-                  <Text style={styles.MessageText}>{item.messageText}</Text>
+                  <Text style={[styles.MessageText, {color: theme.color}]}>{item.messageText}</Text>
                 </View>
               </View>
             </TouchableOpacity>

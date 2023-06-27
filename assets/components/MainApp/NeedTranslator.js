@@ -1,11 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { Video} from 'expo-av';
 import { Camera } from 'expo-camera';
+import themeContext from './ThemeContext';
 
 
 
 const NeedTranslator = () => {
+  const theme = useContext(themeContext);
   const [data, setData] = useState([
     { id: 0, title: "Basic Signs", videoUri: require('../../img/mainApp/video2.mp4'), time: 3 },
     { id: 1, title: "Basic Signs 2", videoUri: require('../../img/mainApp/Video3.mp4'), time: 4 },
@@ -31,7 +33,7 @@ const NeedTranslator = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: theme.background}]}>
       <View style={styles.flatlistView}>
         <FlatList
           data={data}

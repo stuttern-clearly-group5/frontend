@@ -1,5 +1,5 @@
 import { Platform, StyleSheet, Text, View, StatusBar, SafeAreaView,  TouchableOpacity, ImageBackground, TextInput, Image} from 'react-native'
-import React, { createRef, useState, useEffect } from 'react'
+import React, { createRef, useState, useEffect , useContext} from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import CustomInput from '../authentication/CustomInput';
 import {useForm} from 'react-hook-form';
@@ -7,6 +7,7 @@ import { useTheme } from 'react-native-paper';
 import CustomButton from '../authentication/customButton';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
+import themeContext from './ThemeContext';
 
 import * as ImagePicker from 'expo-image-picker';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
@@ -20,6 +21,7 @@ const {colors}                                           = useTheme();
 
 const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
 const [image, setImage]                               = useState('https://source.unsplash.com/80x80/?avatar');
+const theme = useContext(themeContext);
 
 
 useEffect(() => {
@@ -106,7 +108,7 @@ const renderHeader = () => (
 )
 
   return (
-    <SafeAreaView style = {styles.container}>
+    <SafeAreaView style = {[styles.container, {backgroundColor: theme.background}]}>
     <BottomSheet
         ref                       = {bs}
         snapPoints                = {[330, 0]}

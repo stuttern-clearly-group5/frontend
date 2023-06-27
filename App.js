@@ -2,8 +2,13 @@ import React from 'react';
 
 import { AuthProvider } from './assets/components/authentication/Context';
 import AppNav from './assets/components/Navigation/AppNav';
+import { useState, useEffect } from 'react';
+import { EventRegister } from 'react-native-event-listeners';
+import { DarkTheme, DefaultTheme} from '@react-navigation/native';
 
-import { ThemeProvider } from  './assets/components/MainApp/ThemeContext';
+// import { ThemeProvider } from  './assets/components/MainApp/ThemeContext';
+import themeContext from './assets/components/MainApp/ThemeContext';
+import theme from './assets/components/MainApp/Theme';
 
 // import * as Firebase from "firebase";
 
@@ -26,14 +31,28 @@ import { ThemeProvider } from  './assets/components/MainApp/ThemeContext';
 // const app = initializeApp(firebaseConfig);
 
 export default function App() {
+
+  const [mode, setMode] = useState(false);
+
+  useEffect(()=>{
+    let eventListener = EventRegister.addEventListener("changeTheme", (data) =>{
+      setMode(data);
+    });
+    return () => {
+      EventRegister.removeEventListener(eventListener);
+    }
+  })
+
   return (
-     <AuthProvider>
-    <ThemeProvider>
+    <themeContext.Provider value={mode === true ? theme.dark : theme.light}>
+     <AuthProvider theme={mode === true ? DarkTheme : DefaultTheme}>
+    
    
     <AppNav/>
     
-    </ThemeProvider>
+    
     </AuthProvider>
+    </themeContext.Provider>
   );
 }
 

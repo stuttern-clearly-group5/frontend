@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Platform, StatusBar, StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import themeContext from './ThemeContext';
 
 const BasicSignLanguage = () => {
   const [showImage, setShowImage] = useState(false);
@@ -8,6 +9,7 @@ const BasicSignLanguage = () => {
   const [showName, setShowName] = useState(false);
   const [showWords, setShowWords] = useState(false);
   const [showAnimals, setShowAnimals] = useState(false);
+  const theme = useContext(themeContext);
 
 
   const toggleImage = () => {
@@ -35,11 +37,11 @@ const BasicSignLanguage = () => {
   };
 
   return (
-    <ScrollView style={{backgroundColor: 'white'}}>
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={{backgroundColor: theme.background }}>
+    <SafeAreaView style={[styles.container, {backgroundColor: theme.background } ]}>
       <View style={{paddingTop: 25}}>
-        <TouchableOpacity onPress={toggleImage} style={styles.header}>
-          <Text style={styles.headerText}>Alphabets</Text>
+        <TouchableOpacity onPress={toggleImage} style={[styles.header, {color: theme.color}]}>
+          <Text style={[styles.headerText, {color: theme.color}]}>Alphabets</Text>
           <Text>{showImage ? '▲' : '▼'}</Text>
         </TouchableOpacity>
         {showImage && (
@@ -52,7 +54,7 @@ const BasicSignLanguage = () => {
       </View>
       <View style={{paddingTop: 25}}>
         <TouchableOpacity onPress={toggleNumbers} style={styles.header}>
-          <Text style={styles.headerText}>Numbers</Text>
+          <Text style={[styles.headerText, {color: theme.color}]}>Numbers</Text>
           <Text>{showNumbers ? '▲' : '▼'}</Text>
         </TouchableOpacity>
         {showNumbers && (
@@ -65,7 +67,7 @@ const BasicSignLanguage = () => {
         </View>
             <View style={{paddingTop: 25}}>
         <TouchableOpacity onPress={toggleAnimals} style={styles.header}>
-          <Text style={styles.headerText}>Common Animals</Text>
+          <Text style={[styles.headerText, {color: theme.color}]}>Common Animals</Text>
           <Text>{showAnimals ? '▲' : '▼'}</Text>
         </TouchableOpacity>
         {showAnimals && (
@@ -78,7 +80,7 @@ const BasicSignLanguage = () => {
         </View>
     <View style={{paddingTop: 25}}>
         <TouchableOpacity onPress={toggleDays} style={styles.header}>
-          <Text style={styles.headerText}>Days of the week</Text>
+          <Text style={[styles.headerText, {color: theme.color}]}>Days of the week</Text>
           <Text>{showDays ? '▲' : '▼'}</Text>
         </TouchableOpacity>
         {showDays && (
@@ -91,7 +93,7 @@ const BasicSignLanguage = () => {
         </View>
             <View style={{paddingTop: 25}}>
         <TouchableOpacity onPress={toggleName} style={styles.header}>
-          <Text style={styles.headerText}>Introduce yourself</Text>
+          <Text style={[styles.headerText, {color: theme.color}]}>Introduce yourself</Text>
           <Text>{showName ? '▲' : '▼'}</Text>
         </TouchableOpacity>
         {showName && (
@@ -104,7 +106,7 @@ const BasicSignLanguage = () => {
         </View>
     <View style={{paddingTop: 25}}>
         <TouchableOpacity onPress={toggleWords} style={styles.header}>
-          <Text style={styles.headerText}>Common words</Text>
+          <Text style={[styles.headerText, {color: theme.color}]}>Common words</Text>
           <Text>{showWords ? '▲' : '▼'}</Text>
         </TouchableOpacity>
         {showWords && (

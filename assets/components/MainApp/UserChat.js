@@ -1,11 +1,13 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, useContext} from 'react';
 import {View, ScrollView, Text, Button, StyleSheet} from 'react-native';
 import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import themeContext from './ThemeContext';
 
 const UserChat = () => {
   const [messages, setMessages] = useState([]);
+  const theme = useContext(themeContext);
 
   useEffect(() => {
     setMessages([
@@ -64,7 +66,7 @@ const UserChat = () => {
         }}
         textStyle={{
           right: {
-            color: '#fff',
+            color: theme.color,
           },
         }}
       />
@@ -78,18 +80,20 @@ const UserChat = () => {
   }
 
   return (
-    <GiftedChat
-      messages={messages}
-      onSend={(messages) => onSend(messages)}
-      user={{
-        _id: 1,
-      }}
-      renderBubble={renderBubble}
-      alwaysShowSend
-      renderSend={renderSend}
-      scrollToBottom
-      scrollToBottomComponent={scrollToBottomComponent}
-    />
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <GiftedChat
+        messages={messages}
+        onSend={(messages) => onSend(messages)}
+        user={{
+          _id: 1,
+        }}
+        renderBubble={renderBubble}
+        alwaysShowSend
+        renderSend={renderSend}
+        scrollToBottom
+        scrollToBottomComponent={scrollToBottomComponent}
+      />
+    </View>
   );
 };
 
@@ -98,8 +102,7 @@ export default UserChat;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    
   },
  
 });

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React , { useContext, useState } from 'react'
 import Chats from "./Chats";
 import Home from "./Home";
 import Options from "./Options";
@@ -10,6 +10,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import WelcomePage from './WelcomePage';
+import themeContext from './ThemeContext';
+import theme from './Theme';
 
 
 
@@ -24,12 +26,15 @@ const screenOptions = {
         left: 0,
         elevation: 0,
         height: 60,
-        background: "#bbb",
+        backgroundColor: theme.background,
     }
 }
 
 const BottomTab = () => {
+  const theme = useContext(themeContext);
   const navigation = useNavigation();
+  const [mode, setMode] = useState(false);
+
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen name="WelcomePage" component={WelcomePage} 
