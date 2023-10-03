@@ -31,6 +31,7 @@ const Options = () => {
           label   = {'Easy Dictionary'}
         />
                 <OptionsButton 
+          onPress = {() => navigation.navigate('History')}
           icon  = {<MaterialIcons name="history" size={24} color="#42DA00" />}
           label = {'History'}
         />
@@ -39,9 +40,9 @@ const Options = () => {
           label = {'Favorites'}
         />
         <OptionsButton 
-          onPress = {() => navigation.navigate('Need a translator')}
+          onPress = {() => navigation.navigate('Video_Upload')}
           icon  = {<MaterialCommunityIcons name="file-download-outline" size={24} color="black" />}
-          label = {'Saved images'}
+          label = {'Saved \n videos'}
         />
       </View>
     </SafeAreaView>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, Alert, Share, Linking } from 'react-native'
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
 import { useContext } from 'react';
 import { AuthContext } from '../authentication/Context';
@@ -8,14 +8,57 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import greenLogoNew from '../../img/mainApp/greenLogoNew.png'
 import themeContext from './ThemeContext';
+import { useNavigation } from '@react-navigation/native';
+import { onPress } from 'deprecated-react-native-prop-types/DeprecatedTextPropTypes';
 
 const CustomDrawer = (props) => {
+  const navigation = useNavigation();
+  const recipientEmail = "stutern@gmail.com";
+  const emailSubject = "Feedback from the App";
+  const emailBody = "Dear Stutern Team,\n\nI have some feedback regarding the app: ";
+
+    const shareAppLink = async () => {
+  try {
+    const result = await Share.share({
+      message: 'Check out this cool app!, https://expo.dev/artifacts/eas/6zcWEo3xwzyB5TDAsoSPsX.apk',
+      url: 'https://expo.dev/artifacts/eas/6zcWEo3xwzyB5TDAsoSPsX.apk', // Replace this with the URL of your app in the app store
+    });
+
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // Shared with activity type of result.activityType
+      } else {
+        // Shared
+      }
+    } else if (result.action === Share.dismissedAction) {
+      // Dismissed
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
 
     const Privacy = () => {
     // console.log("Privacy function");
     Alert.alert("Privacy Policy", 
     "All user information inputted on clearly app are kept secret from third parties. This is done to ensure confidentiality and in accordance with the government's privacy protection policies.",
     )
+  };
+
+  const Feedback = async () => {
+    const mailtoUrl = `mailto:${recipientEmail}?subject=${emailSubject}&body=${emailBody}`;
+    
+    try {
+      await Linking.openURL(mailtoUrl);
+    } catch (error) {
+      Alert.alert("Error", "Failed to open email client. Please check your email settings.");
+    }
+  };
+
+  const Ratings = () => {
+    // console.log("Privacy function");
+    onPress(() => navigation.navigate("Ratings"));
   };
 
     const { logout } = useContext(AuthContext);
@@ -37,19 +80,19 @@ const CustomDrawer = (props) => {
         </DrawerContentScrollView>
         <View style={{ paddingHorizontal: 24, borderTopWidth: 1, borderTopColor: '#C5C5C5', backgroundColor: theme.background}}>
         {/* <Text style={{ color: '#C5C5C5', marginBottom: 3, fontSize: 8 }}>Others</Text> */}
-                <TouchableOpacity onPress={()=>{}} style={{paddingVertical: 10}}>
+                <TouchableOpacity onPress={Ratings} style={{paddingVertical: 10}}>
             <View style={{flexDirection: 'row', alignItems: 'center', backgroundColor: theme.background}}>
                 <Entypo name="thumbs-up" size={22} color="#42DA00" />
                 <Text style={{fontSize: 15, marginLeft: 5, color: theme.color }} >Rate Us</Text>
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>{}} style={{paddingVertical: 10}}>
+            <TouchableOpacity onPress={shareAppLink} style={{paddingVertical: 10}}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Ionicons name="share-social-outline" size={22}  color= {theme.color}/>
-                <Text style={{fontSize: 15, marginLeft: 5,  color: theme.color  }} >Share</Text>
+                <Text style={{fontSize: 15, marginLeft: 5,  color: theme.color  }} >Share App Link</Text>
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>{}} style={{paddingVertical: 10}}>
+            <TouchableOpacity onPress={Feedback} style={{paddingVertical: 10}}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <MaterialIcons name="chat-bubble-outline" size={22} color="red" />
                 <Text style={{fontSize: 15, marginLeft: 5,  color: theme.color  }} >Feedback</Text>

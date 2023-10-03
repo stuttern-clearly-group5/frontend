@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   paddingRight: 20,
   alignItems: "center",
   backgroundColor: "#ffffff",
-  marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  // marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
 card: {
   width: "100%"

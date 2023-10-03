@@ -75,7 +75,7 @@ const Dictionary = () => {
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <TextInput
               placeholder="Search a word"
-              placeholderTextColor="#2E8E05"
+              placeholderTextColor="#96CE95"
               style={styles.inputBox}
               multiline={true}
               value={newWord}

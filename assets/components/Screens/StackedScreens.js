@@ -17,6 +17,8 @@ import CodeScreen from '../authentication/CodeScreen';
 import EmailSuccessful from '../authentication/EmailSuccessful';
 import ForgotPassword from '../authentication/ForgotPassword';
 import ResetPassWord from '../authentication/ResetPassWord';
+import GoogleSignUp from '../authentication/GoogleSignUp';
+import RecordVideo from '../MainApp/RecordVideo';
 
 
 const Stack = createStackNavigator();
@@ -49,11 +51,12 @@ useEffect(() => {
   return (
     isAppFirstLaunched != null && (
         <Stack.Navigator screenOptions = {{ headerShown: false }}>
-        {/* {isAppFirstLaunched && (<Stack.Screen name="FirstScreen" component={FirstScreen} />)}
-        {isAppFirstLaunched && (<Stack.Screen name="Onboarding" component={Onboarding} />)} */}
-        <Stack.Screen name="FirstScreen" component={FirstScreen} />
-        <Stack.Screen name="Onboarding" component={Onboarding} />
+        {isAppFirstLaunched && (<Stack.Screen name="FirstScreen" component={FirstScreen} />)}
+        {isAppFirstLaunched && (<Stack.Screen name="Onboarding" component={Onboarding} />)}
+        {/* <Stack.Screen name="FirstScreen" component={FirstScreen} />
+        <Stack.Screen name="Onboarding" component={Onboarding} /> */}
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="RecordVideo" component={RecordVideo} />
         <Stack.Screen name="SignUpForm" component={SignUpForm} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="EmailVerify" component={EmailVerify} />
@@ -63,6 +66,7 @@ useEffect(() => {
         <Stack.Screen name="EmailSuccessful" component={EmailSuccessful} />
         <Stack.Screen name="ForgotPassWord" component={ForgotPassword} />
         <Stack.Screen name="ResetPassWord" component={ResetPassWord} />
+        {/* <Stack.Screen name="GoogleSignUp" component={GoogleSignUp} /> */}
 
         
       </Stack.Navigator>

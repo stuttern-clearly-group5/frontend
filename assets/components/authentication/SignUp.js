@@ -15,7 +15,7 @@ const SignUp = () => {
         style={{width: 138, height: 49, marginTop: 115, marginRight: 118, marginLeft: 119, marginBottom: 148}}
       />
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate("SignUpForm")}
+        <TouchableOpacity onPress={() => navigation.navigate("RecordVideo")}
             style={{backgroundColor: '#42DA00', borderRadius: 20, alignContent: 'center' , 
             marginHorizontal: 24, paddingTop: 15, paddingBottom: 15, paddingLeft: 12, paddingRight: 12}}>
           <Text style={{fontWeight: 500, fontSize: 16, color: 'white', textAlign: 'center'}}>Sign Up as a translator</Text>
@@ -43,7 +43,7 @@ export default SignUp;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        // marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         backgroundColor: 'white',
     }
 })

@@ -2,6 +2,7 @@
   "expo": {
     "name": "clearly_app",
     "slug": "clearly_app",
+    "plugins": ["@react-native-google-signin/google-signin"],
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/iconWhiteBack.png",
@@ -22,6 +23,7 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/iconWhiteBack.png",
         "backgroundColor": "#ffffff"

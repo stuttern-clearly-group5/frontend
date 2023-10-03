@@ -17,14 +17,24 @@ library.add(faCheckSquare);
 
 
 // Add your Firebase configuration here
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDkNqRKourFdoXR3Zk2yGrXdUsXvteEi7E",
+//   authDomain: "clearly-68c14.firebaseapp.com",
+//   databaseURL: "https://clearly-68c14-default-rtdb.firebaseio.com/",
+//   projectId: "clearly-68c14",
+//   storageBucket: "clearly-68c14.appspot.com",
+//   messagingSenderId: "254125968574",
+//   appId: "1:254125968574:web:b70c4f21a757b8ff1c22ef"
+// };
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDkNqRKourFdoXR3Zk2yGrXdUsXvteEi7E",
-  authDomain: "clearly-68c14.firebaseapp.com",
-  databaseURL: "https://clearly-68c14-default-rtdb.firebaseio.com/",
-  projectId: "clearly-68c14",
-  storageBucket: "clearly-68c14.appspot.com",
-  messagingSenderId: "254125968574",
-  appId: "1:254125968574:web:b70c4f21a757b8ff1c22ef"
+  apiKey: "AIzaSyA5GSaE8hAAAZqVyi7dUB9jG33As-Ft_T8",
+  authDomain: "clearlyapp2-38773.firebaseapp.com",
+  databaseURL: "https://clearlyapp2-38773-default-rtdb.firebaseio.com/",
+  projectId: "clearlyapp2-38773",
+  storageBucket: "clearlyapp2-38773.appspot.com",
+  messagingSenderId: "649929654576",
+  appId: "1:649929654576:web:2e5e648e7521a61ff848f5"
 };
 
 // Initialize Firebase
@@ -257,7 +267,7 @@ export default SignUpForm;
 const styles = StyleSheet.create({
     container: {
         flex             : 1,
-        marginTop        : Platform.OS === 'android' ? StatusBar.currentHeight: 0,
+        // marginTop        : Platform.OS === 'android' ? StatusBar.currentHeight: 0,
         backgroundColor  : "white",
         paddingHorizontal: 24,
     },

@@ -1,4 +1,4 @@
-import { Platform, StatusBar, StyleSheet, View, SafeAreaView, TouchableOpacity, Switch } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, SafeAreaView, TouchableOpacity, Switch, Alert } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { Feather } from '@expo/vector-icons';
@@ -70,6 +70,19 @@ const Profile = () => {
     }
   };
 
+  const Notification = () => {
+    // console.log("Privacy function");
+    Alert.alert("Notification", 
+    "No new notification",
+    )
+  };
+
+  const Language = () => {
+    Alert.alert("Available Languages", 
+    "This app is currently only available in English Language",
+    )
+  };
+
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
       <View style={styles.userInfoSection}>
@@ -115,7 +128,7 @@ const Profile = () => {
             <Text style={[styles.menuItemText, {color: theme.color}]}>Avatar</Text>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress = {() => {}}>
+        <TouchableRipple onPress = {Notification}>
         <View            style   = {styles.menuItem}>
         <Ionicons        name    = "md-notifications-outline" size = {24} color={theme.color} />
         <Text            style   = {[styles.menuItemText, {color: theme.color}]}>Notifications</Text>
@@ -127,7 +140,7 @@ const Profile = () => {
         <Text            style   = {[styles.menuItemText, {color: theme.color}]}>Settings</Text>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress = {() => {}}>
+        <TouchableRipple onPress = {Language}>
         <View            style   = {styles.menuItem}>
         <Ionicons        name    = "globe-outline" size = {24} color={theme.color}  />
         <Text            style   = {[styles.menuItemText, {color: theme.color}]}>App language</Text>
@@ -161,7 +174,7 @@ export default Profile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    // marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   userInfoSection: {
     flex: 0.25,

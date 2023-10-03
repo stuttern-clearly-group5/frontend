@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "688494302382",
+    "project_id": "clearlytranslator",
+    "storage_bucket": "clearlytranslator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688494302382:android:be15c33ec91cc380c8c93f",
+        "android_client_info": {
+          "package_name": "com.anonymous.clearly_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "688494302382-98sfrj6artvsrn123jh2t8hbd00gljb6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.clearly_app",
+            "certificate_hash": "f0b8824bfa21088894ab2c2ff8d84ec0a546b793"
+          }
+        },
+        {
+          "client_id": "688494302382-gnrnjb5ecku4bv7vlj6oe4pdpn0j5lk7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.clearly_app",
+            "certificate_hash": "ce8b956e425268f1e31870c23f15bad5fe92f192"
+          }
+        },
+        {
+          "client_id": "688494302382-ats784itmq9s92ka4ih7g1auvas42ard.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsMnDFDIa__5OShkWjvnu0sEmGt9aItT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688494302382-ats784itmq9s92ka4ih7g1auvas42ard.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

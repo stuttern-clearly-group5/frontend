@@ -9,17 +9,23 @@ import Dictionary from '../MainApp/Dictionary';
 import EditProfile from '../MainApp/EditProfile';
 import UserChat from '../MainApp/UserChat';
 import BasicSignLanguage from '../MainApp/BasicSignLanguage';
-import NeedTranslator from '../MainApp/NeedTranslator';
+import VideoListPage from '../MainApp/NeedTranslator';
 import ChangePassword from '../MainApp/ChangePassword';
 import Avatar from '../MainApp/Avatar';
 import Settings from '../MainApp/Settings';
 import HelpAndSupport from '../MainApp/HelpAndSupport';
 import TermsOfService from '../MainApp/TermsOfService';
-import VideoCallScreen from '../MainApp/VideoCallScreen';
+import VideoUploadScreen from '../MainApp/VideoUploadScreen';
+import History from '../MainApp/History';
+import Ratings from '../MainApp/Ratings';
+import GoogleSignUp from '../authentication/GoogleSignUp';
+
+
 
 const Stack = createStackNavigator();
 
 const AuthenticationScr = () => {
+
   return (
         <Stack.Navigator screenOptions = {{ headerShown: false }}>
         <Stack.Screen    name          = "BottomTab" component      = {BottomTab} options = {{ headerShown: false}}/>
@@ -55,15 +61,6 @@ const AuthenticationScr = () => {
         <Stack.Screen name    = "Dictionary" component = {Dictionary}
                       options = {{ headerShown: true, headerTitleAlign: 'center', 
         headerRight: () => (
-              //  <Ionicons
-              //   name="notifications-outline"
-              //   size={24}
-              //   color="black"
-              //   style={{ marginRight: 10 }}
-              //   // onPress={() => {
-              //   //   // Handle the icon press event
-              //   // }}
-              // />
       <Image
       style  = {{width: 24, height: 24, tintColor: '#288400', marginRight: 15}}
       source = {require('../../img/mainApp/loading.png')}
@@ -95,7 +92,7 @@ const AuthenticationScr = () => {
     ),
         }} />
 
-        <Stack.Screen name    = "Need a translator" component = {NeedTranslator}
+        <Stack.Screen name    = "Need a translator" component = {VideoListPage}
                       options = {{ headerShown: true, headerTitleAlign: 'center', 
         headerRight: () => (
        <Ionicons
@@ -172,7 +169,7 @@ const AuthenticationScr = () => {
     ),
         }} />
 
-        <Stack.Screen name    = "Video Call" component = {VideoCallScreen}
+        <Stack.Screen name    = "Video_Upload" component = {VideoUploadScreen}
                       options = {{ headerShown: true, headerTitleAlign: 'center', 
         headerRight: () => (
        <Ionicons
@@ -183,6 +180,44 @@ const AuthenticationScr = () => {
       />
     ),
         }} />
+
+        <Stack.Screen name    = "History" component = {History}
+                      options = {{ headerShown: true, headerTitleAlign: 'center', 
+        headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+      />
+    ),
+        }} />
+
+        <Stack.Screen name    = "Ratings" component = {Ratings}
+                      options = {{ headerShown: true, headerTitleAlign: 'center', 
+        headerRight: () => (
+       <Ionicons
+        name  = "notifications-outline"
+        size  = {24}
+        color = "black"
+        style = {{ marginRight: 10 }}
+      />
+    ),
+        }} />
+
+        {/* <Stack.Screen name    = "GoogleSignUp" component = {GoogleSignUp}
+    //                   options = {{ headerShown: true, headerTitleAlign: 'center', 
+    //     headerRight: () => (
+    //    <Ionicons
+    //     name  = "notifications-outline"
+    //     size  = {24}
+    //     color = "black"
+    //     style = {{ marginRight: 10 }}
+    //   />
+    // ),
+    //     }} 
+
+        /> */}
      
       </Stack.Navigator>
   )

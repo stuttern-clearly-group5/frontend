@@ -17,7 +17,7 @@ const Settings = ({ navigation }) => {
   const navigateToPrivacy = () => {
     // console.log("Privacy function");
     Alert.alert("Privacy & Security Options", 
-    "All user information inputted on clearly app are kept secret from third parties. This is done to ensure confidentiality and in accordance with the government's privacy protection policies",
+    "All user information inputted on clearly app are kept secret from third parties. This is done to ensure confidentiality and in accordance with the government's privacy protection policies.",
     )
   };
 

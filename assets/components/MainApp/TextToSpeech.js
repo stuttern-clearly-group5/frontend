@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, TouchableOpacity, Platform, StatusBar, KeyboardAvoidingView, SafeAreaView, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, Platform, StatusBar, KeyboardAvoidingView, SafeAreaView, TextInput, Share } from 'react-native'
 import React, { useState, useRef, useContext } from 'react'
 import { useNavigation } from "@react-navigation/native";
 import * as Speech from 'expo-speech';
@@ -14,8 +14,6 @@ import themeContext from './ThemeContext';
 const TextToSpeech = () => {
   const navigation = useNavigation();
   const [iptValue, setIptValue] = useState('');
-  // const [volume, setVolume] = useState(3); // Initial volume value (between 0 and 3)
-  // const soundRef = useRef(null);
   const theme = useContext(themeContext);
   const thingToSay = iptValue;
 
@@ -27,29 +25,26 @@ const TextToSpeech = () => {
     });
   }
 
-  // const handleSpeechStart = async () => {
-  //   const { sound } = await Audio.Sound.createAsync(
-  //     { uri: 'http://www.example.com/audio.mp3' },
-  //     { shouldPlay: true, volume }
-  //   );
-  //   soundRef.current = sound;
-  // }
+  const shareAppLink = async () => {
+  try {
+    const result = await Share.share({
+      message: 'Check out this cool app!, https://expo.dev/artifacts/eas/6zcWEo3xwzyB5TDAsoSPsX.apk',
+      url: 'https://expo.dev/artifacts/eas/6zcWEo3xwzyB5TDAsoSPsX.apk', // Replace this with the URL of your app in the app store
+    });
 
-  // const handleSpeechDone = async () => {
-  //   if (soundRef.current) {
-  //     soundRef.current.unloadAsync();
-  //   }
-  // }
-
-//  const increaseVolume = () => {
-//     const newVolume = Math.min(volume + 0.5, 3); // Increase volume by 0.5, capped at 3
-//     setVolume(newVolume);
-//   };
-
-//   const decreaseVolume = () => {
-//     const newVolume = Math.max(volume - 0.5, 0); // Decrease volume by 0.5, capped at 0
-//     setVolume(newVolume);
-//   };
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // Shared with activity type of result.activityType
+      } else {
+        // Shared
+      }
+    } else if (result.action === Share.dismissedAction) {
+      // Dismissed
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
   return (
     <View style={[styles.container, {backgroundColor: theme.background}]}>
@@ -70,7 +65,7 @@ const TextToSpeech = () => {
         <Button title="Listen" onPress={speak} color="#2E8E05" />
       </View>
       <View style={styles.bottomIcons}>
-        <TouchableOpacity style={styles.bottomIconImg}>
+        <TouchableOpacity style={styles.bottomIconImg} onPress={shareAppLink}>
         <Feather name="link-2" size={19.5} color="#288400" />
         <Text style={styles.bottomIconText}>Share link</Text>
         </TouchableOpacity>
@@ -83,11 +78,6 @@ const TextToSpeech = () => {
         <Text style={styles.bottomIconText}>Send</Text>
         </TouchableOpacity>
       </View>
-
-      {/* <View style={styles.volumeControls}>
-        <Button title="Increase Volume" onPress={increaseVolume} />
-        <Button title="Decrease Volume" onPress={decreaseVolume} />
-      </View> */}
     </View>
   )
 }

@@ -17,6 +17,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Settings from './Settings';
 import themeContext from './ThemeContext';
 import theme from './Theme';
+import Video_Upload from './NeedTranslator';
 
 
 
@@ -166,7 +167,7 @@ const DrawerNavigator = () => (
     />
       <Drawer.Screen
       name="Saved images"
-      component={SpeechToText}
+      component={Video_Upload}
       options={{
         drawerIcon: ({ color, size }) => <MaterialCommunityIcons name="file-image-outline" size={24} color="blue" />,
         headerShown: true, headerTitleAlign: 'center',
@@ -202,7 +203,7 @@ export default DrawerNavigator;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    // marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     backgroundColor: "white",
     paddingHorizontal: 14,
   },

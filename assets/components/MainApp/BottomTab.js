@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React , { useContext, useState } from 'react'
 import Chats from "./Chats";
-import Home from "./Home";
+// import Home from "./Home";
 import Options from "./Options";
 import Profile from "./Profile";
 import { useNavigation } from "@react-navigation/native";

@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView, TextInput, TouchableOpacity, Share } from 'react-native';
 import { Audio } from 'expo-av'; // Import Audio from expo-av
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import themeContext from './ThemeContext';
 import Voice from '@react-native-voice/voice';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
 
 
 const SpeechToText = () => {
@@ -51,6 +54,40 @@ const SpeechToText = () => {
     }
   };
 
+    const shareContent = async () => {
+    try {
+      if (result !== '') {
+        await Sharing.shareAsync(result);
+      } else {
+        // Handle case where TextInput is empty
+        alert('The text to share is empty.');
+      }
+    } catch (error) {
+      alert('Sharing failed. Error: ' + error.message);
+    }
+  };
+
+  const shareAppLink = async () => {
+  try {
+    const result = await Share.share({
+      message: 'Check out this cool app!, https://expo.dev/artifacts/eas/6zcWEo3xwzyB5TDAsoSPsX.apk',
+      url: 'https://expo.dev/artifacts/eas/6zcWEo3xwzyB5TDAsoSPsX.apk', // Replace this with the URL of your app in the app store
+    });
+
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // Shared with activity type of result.activityType
+      } else {
+        // Shared
+      }
+    } else if (result.action === Share.dismissedAction) {
+      // Dismissed
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
       <Text style={{ paddingBottom: 5, textAlign: 'center', paddingTop: 20, color: theme.color }}>
@@ -75,6 +112,21 @@ const SpeechToText = () => {
         />
       </View>
       {error && <Text>{error.toString()}</Text>}
+
+      <View style={styles.bottomIcons}>
+        <TouchableOpacity style={styles.bottomIconImg} onPress={shareAppLink}>
+        <Feather name="link-2" size={19.5} color="#288400" />
+        <Text style={styles.bottomIconText}>Share link</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.bottomIconImg}>
+        <Octicons name="copy" size={19.5} color="#288400" />
+        <Text style={styles.bottomIconText}>Copy</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.bottomIconImg} onPress={shareContent}>
+        <Feather name="send" size={19.5} color="#288400" />
+        <Text style={styles.bottomIconText}>Send</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -110,4 +162,20 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#EEEEEE',
   },
+  bottomIcons: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 40,
+  },
+  bottomIconText: {
+    color: '#B2BEB5', 
+    fontSize: 12,
+    fontWeight: '800',
+  },
+  bottomIconImg: {
+    justifyContent: 'center', 
+    alignItems: 'center'
+  }
 });

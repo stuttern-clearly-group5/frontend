@@ -76,7 +76,7 @@ export default inputField
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        // marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         backgroundColor: "white",
         paddingHorizontal: 24,
     },
